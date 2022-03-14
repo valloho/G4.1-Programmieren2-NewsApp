@@ -9,13 +9,6 @@ import java.util.List;
 public class AppControllerTest
 {
 
-    @Test
-    public void firstTest(){
-        App myApp = new App();
-        String actual = myApp.welcomeMessage();
-        assertEquals("Hello World", actual);
-    }
-
     /**
      * Test if article count is 3 when there are 3 articles
      */
