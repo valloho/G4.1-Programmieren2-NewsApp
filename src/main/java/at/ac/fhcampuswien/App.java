@@ -7,14 +7,16 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
-public class App { //extends Application
-
+public class App {
 
     public static void main(String[] args) {
-        Menu menu = new Menu();
         //launch(args);
+
+        Menu menu = new Menu();
         menu.start();
+
     }
+
     /*
     @Override
     public void start(Stage primaryStage) throws Exception {
@@ -25,5 +27,5 @@ public class App { //extends Application
         primaryStage.setScene(scene);
         primaryStage.show();
     }
-     */
+    */
 }
