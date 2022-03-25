@@ -7,12 +7,17 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
-public class App extends Application {
+public class App {
 
     public static void main(String[] args) {
-        launch(args);
+        //launch(args);
+
+        Menu menu = new Menu();
+        menu.start();
+
     }
 
+    /*
     @Override
     public void start(Stage primaryStage) throws Exception {
         Parent root = FXMLLoader.load(getClass().getResource("/menu.fxml"));
@@ -22,4 +27,5 @@ public class App extends Application {
         primaryStage.setScene(scene);
         primaryStage.show();
     }
+    */
 }
