@@ -59,5 +59,12 @@ public class AppControllerTest
         assertEquals(0, appController.getArticleCount());
     }
 
+    /**
+     * Test if list contains all articles with query "bitcoin"
+     */
+    @Test
+    public void getAllNewsBitcoin(){
+
+    }
 
 }
