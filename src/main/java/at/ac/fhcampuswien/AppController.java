@@ -23,7 +23,8 @@ public class AppController
      */
     public void setArticles(List<Article> articles)
     {
-        List<Article> articleList = new ArrayList<Article>();
+        this.articles = articles;
+
     }
 
     //endregion
@@ -41,6 +42,9 @@ public class AppController
         }
 
         return this.articles.size();
+    }
+    public List<Article> getArticles(){
+        return this.articles;
     }
 
     /**

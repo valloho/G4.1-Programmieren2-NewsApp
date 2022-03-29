@@ -59,5 +59,44 @@ public class AppControllerTest
         assertEquals(0, appController.getArticleCount());
     }
 
+    @Test
+    public void setArticleTest1(){
+
+        AppController appController = new AppController();
+        appController.setArticles(null);
+
+        assertNull(appController.getArticles());
+
+    }
+
+    @Test
+    public void setArticleTest2(){
+
+        AppController appController = new AppController();
+        List<Article> articleList = new ArrayList<Article>();
+        articleList.add(new Article("bobby", "bobby's great adventure"));
+        articleList.add(new Article("boberts", "boberts' amazing adventure"));
+        appController.setArticles(articleList);
+
+        assertEquals(articleList, appController.getArticles());
+
+    }
+
+
+    @Test
+    public void setArticleTest3(){
+
+        AppController appController = new AppController();
+        List<Article> articleList = new ArrayList<Article>();
+        articleList.add(new Article("bobby", "bobby's great adventure"));
+        articleList.add(new Article("boberts", "boberts' amazing adventure"));
+        articleList.add(new Article("bobbie", "bobbie's shining adventure"));
+        articleList.add(new Article("bubba", "bubba's shrimp company"));
+        articleList.add(new Article("brobob", "brobob's confusing adventure"));
+        appController.setArticles(articleList);
+
+        assertEquals(articleList, appController.getArticles());
+
+    }
 
 }
