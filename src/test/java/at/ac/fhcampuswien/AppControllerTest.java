@@ -20,7 +20,7 @@ public class AppControllerTest
 
         for (int i = 0; i < 3; i++)
         {
-            articles.add(new Article());
+            articles.add(new Article("bob", "bob's adventure"));
         }
 
         appController.setArticles(articles);
@@ -39,7 +39,7 @@ public class AppControllerTest
 
         for (int i = 0; i < 6; i++)
         {
-            articles.add(new Article());
+            articles.add(new Article("bob", "bob's adventure"));
         }
 
         appController.setArticles(articles);

@@ -23,7 +23,7 @@ public class AppController
      */
     public void setArticles(List<Article> articles)
     {
-
+        List<Article> articleList = new ArrayList<Article>();
     }
 
     //endregion
