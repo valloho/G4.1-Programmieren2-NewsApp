@@ -1,138 +1,103 @@
 package at.ac.fhcampuswien;
 
-import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.*;
 import java.util.ArrayList;
 import java.util.List;
 
-
-public class AppControllerTest
+/**
+ * Manages a list of articles
+ */
+public class AppController
 {
+    private List<Article> articles;
+
+    public AppController()
+    {
+
+    }
+
+    //region SETTER ----------------------------------------------------------------------------------------------------
 
     /**
-     * Test if article count is 3 when there are 3 articles
+     * Sets the current article list to a given article list.
+     * @param articles List of articles to set
      */
-    @Test
-    public void getArticleCountTest1()
+    public void setArticles(List<Article> articles)
     {
-        AppController appController = new AppController();
-        List<Article> articles = new ArrayList<>();
+        this.articles = articles;
 
-        for (int i = 0; i < 3; i++)
+    }
+
+    //endregion
+
+    //region GETTER ----------------------------------------------------------------------------------------------------
+
+    /**
+     * @return The amount of articles
+     */
+    public int getArticleCount()
+    {
+        if (articles == null)
         {
-            articles.add(new Article("bob", "bob's adventure"));
+            return 0;
         }
 
-        appController.setArticles(articles);
-
-        assertEquals(3, appController.getArticleCount());
+        return this.articles.size();
+    }
+    public List<Article> getArticles(){
+        return this.articles;
     }
 
     /**
-     * Test if article count is 6 when there are 6 articles
+     * Not implemented yet!
+     * @return Empty array list of articles
      */
-    @Test
-    public void getArticleCountTest2()
+    public List<Article> getTopHeadLinesAustria()
     {
-        AppController appController = new AppController();
-        List<Article> articles = new ArrayList<>();
-
-        for (int i = 0; i < 6; i++)
-        {
-            articles.add(new Article("bob", "bob's adventure"));
-        }
-
-        appController.setArticles(articles);
-
-        assertEquals(6, appController.getArticleCount());
+        return new ArrayList<>();
     }
 
     /**
-     * Test if article count is 0 when null
+     * Searches for all articles with the query "bitcoin".
+     * @return A list of articles about bitcoins
      */
-    @Test
-    public void getArticleCountTest3()
+    public List<Article> getAllNewsBitcoin()
     {
-        AppController appController = new AppController();
-        appController.setArticles(null);
-
-        assertEquals(0, appController.getArticleCount());
+        return new ArrayList<>();
     }
 
-    @Test
-    public void setArticleTest1(){
+    //endregion
 
-        AppController appController = new AppController();
-        appController.setArticles(null);
+    //region METHODS ---------------------------------------------------------------------------------------------------
 
-        assertNull(appController.getArticles());
-
+    /**
+     * Searches a list of articles with a given query in the title.
+     * @param query What articles are searched
+     * @param articles Where articles are searched
+     * @return List of all articles with the given query
+     */
+    protected List<Article> filterList(String query, List<Article> articles)
+    {
+            List<Article> outputBuffer = new ArrayList<>();
+            for (Article selectedArticle : articles) {
+                if (selectedArticle.getTitle().toLowerCase().contains(query.toLowerCase())) {
+                    outputBuffer.add(selectedArticle);
+                }
+            }
+            if (outputBuffer.isEmpty()) {
+                    return null;
+            }
+            else {
+                return outputBuffer;
+            }
     }
 
-    @Test
-    public void setArticleTest2(){
-
-        AppController appController = new AppController();
-        List<Article> articleList = new ArrayList<Article>();
-        articleList.add(new Article("bobby", "bobby's great adventure"));
-        articleList.add(new Article("boberts", "boberts' amazing adventure"));
-        appController.setArticles(articleList);
-
-        assertEquals(articleList, appController.getArticles());
-
+    /**
+     * Generates a list with dummy articles.
+     * @return List of dummy articles
+     */
+    public static List<Article> generateMockList()
+    {
+        return new ArrayList<>();
     }
-
-
-    @Test
-    public void setArticleTest3(){
-
-        AppController appController = new AppController();
-        List<Article> articleList = new ArrayList<Article>();
-        articleList.add(new Article("bobby", "bobby's great adventure"));
-        articleList.add(new Article("boberts", "boberts' amazing adventure"));
-        articleList.add(new Article("bobbie", "bobbie's shining adventure"));
-        articleList.add(new Article("bubba", "bubba's shrimp company"));
-        articleList.add(new Article("brobob", "brobob's confusing adventure"));
-        appController.setArticles(articleList);
-
-        assertEquals(articleList, appController.getArticles());
-
-    }
-
-    @Test
-    public void filterListTest1(){
-
-        AppController appController = new AppController();
-        List<Article> articleList = new ArrayList<Article>();
-        articleList.add(new Article("bobby", "bobby's great adventure"));
-        articleList.add(new Article("boberts", "boberts' amazing adventure"));
-        appController.setArticles(articleList);
-
-        assertEquals(articleList.get(0), appController.filterList("bobby", articleList).get(0));
-    }
-
-    @Test
-    public void filterListTest2(){
-
-        AppController appController = new AppController();
-        List<Article> articleList = new ArrayList<Article>();
-        articleList.add(new Article("bobby", "bobby's great adventure"));
-        articleList.add(new Article("bobby", "bobby's amazing adventure"));
-        articleList.add(new Article("bobby", "bobby's amazing adventure 2"));
-        appController.setArticles(articleList);
-
-        assertEquals(articleList, appController.filterList("bobby", articleList));
-    }
-
-    @Test
-    public void filterListTest3(){
-
-        AppController appController = new AppController();
-        List<Article> articleList = new ArrayList<Article>();
-        articleList.add(new Article("bobby", "bobby's great adventure"));
-        articleList.add(new Article("boberts", "boberts' amazing adventure"));
-        appController.setArticles(articleList);
-
-        assertEquals(null, appController.filterList("boberta", articleList));
-    }
+    //endregion
 }
