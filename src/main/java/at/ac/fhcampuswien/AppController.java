@@ -23,7 +23,8 @@ public class AppController
      */
     public void setArticles(List<Article> articles)
     {
-        List<Article> articleList = new ArrayList<Article>();
+        this.articles = articles;
+
     }
 
     //endregion
@@ -41,6 +42,9 @@ public class AppController
         }
 
         return this.articles.size();
+    }
+    public List<Article> getArticles(){
+        return this.articles;
     }
 
     /**
@@ -73,7 +77,18 @@ public class AppController
      */
     protected List<Article> filterList(String query, List<Article> articles)
     {
-        return new ArrayList<>();
+            List<Article> outputBuffer = new ArrayList<>();
+            for (Article selectedArticle : articles) {
+                if (selectedArticle.getTitle().toLowerCase().contains(query.toLowerCase())) {
+                    outputBuffer.add(selectedArticle);
+                }
+            }
+            if (outputBuffer.isEmpty()) {
+                    return null;
+            }
+            else {
+                return outputBuffer;
+            }
     }
 
     /**
