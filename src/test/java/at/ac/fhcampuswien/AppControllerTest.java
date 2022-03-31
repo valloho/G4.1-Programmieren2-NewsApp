@@ -82,7 +82,6 @@ public class AppControllerTest
 
     }
 
-
     @Test
     public void setArticleTest3(){
 

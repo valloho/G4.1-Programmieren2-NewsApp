@@ -2,6 +2,7 @@ package at.ac.fhcampuswien;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 /**
  * Manages a list of articles
@@ -24,7 +25,6 @@ public class AppController
     public void setArticles(List<Article> articles)
     {
         this.articles = articles;
-
     }
 
     //endregion
@@ -43,7 +43,12 @@ public class AppController
 
         return this.articles.size();
     }
-    public List<Article> getArticles(){
+
+    /**
+     * @return The list of articles
+     */
+    public List<Article> getArticles()
+    {
         return this.articles;
     }
 
@@ -95,9 +100,37 @@ public class AppController
      * Generates a list with dummy articles.
      * @return List of dummy articles
      */
-    public static List<Article> generateMockList()
+    public static List<Article> generateMockList(int articleAmount)
     {
-        return new ArrayList<>();
+        List<Article> newArticles = new ArrayList<>();
+        Random random = new Random();
+
+        for (int i = 0; i < articleAmount; i++)
+        {
+            int articleNumber = random.nextInt(5);
+
+            Article newArticle = null;
+            switch (articleNumber)
+            {
+                case 0:
+                    newArticle = new Article("Derek Landy", "Skulduggery Pleasant: And he's the good guy");
+                    break;
+                case 1:
+                    newArticle = new Article("Agatha Christi", "Alibi");
+                    break;
+                case 2:
+                    newArticle = new Article("Rick Riordan", "Percy Jackson");
+                    break;
+                case 3:
+                    newArticle = new Article("Michael Ende", "Momo");
+                    break;
+                case 4:
+                    newArticle = new Article("Markus Heitz", "Zwerge");
+            }
+            newArticles.add(newArticle);
+        }
+
+        return newArticles;
     }
     //endregion
 }
