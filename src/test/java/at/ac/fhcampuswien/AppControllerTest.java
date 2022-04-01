@@ -82,7 +82,6 @@ public class AppControllerTest
 
     }
 
-
     @Test
     public void setArticleTest3(){
 
@@ -96,6 +95,30 @@ public class AppControllerTest
         appController.setArticles(articleList);
 
         assertEquals(articleList, appController.getArticles());
+
+    }
+
+    @Test
+    public void getTopHeadlinesAustria1(){
+
+        AppController appController = new AppController();
+        appController.getTopHeadLinesAustria();
+
+        assertNull(appController.getArticles());
+
+    }
+
+    @Test
+    public void getTopHeadlinesAustria2(){
+
+        AppController appController = new AppController();
+        List<Article> articleList = new ArrayList<Article>();
+        articleList.add(new Article("bobby", "bobby's great adventure"));
+        articleList.add(new Article("boberts", "boberts' amazing adventure"));
+        articleList.add(new Article("bobbie", "bobbie's shining adventure"));
+        appController.setArticles(articleList);
+
+        assertEquals(articleList, appController.getTopHeadLinesAustria());
 
     }
 
