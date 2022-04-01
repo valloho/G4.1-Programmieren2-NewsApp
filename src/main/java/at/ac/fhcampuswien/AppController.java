@@ -62,11 +62,21 @@ public class AppController {
 
     /**
      * Searches for all articles with the query "bitcoin".
-     *
      * @return A list of articles about bitcoins
      */
     public List<Article> getAllNewsBitcoin() {
-        return new ArrayList<>();
+        if (articles == null){
+            return null;
+        }
+
+        List<Article> bitcoinList = filterList("bitcoin", articles);
+
+        if (bitcoinList == null || bitcoinList.size() == 0){
+            return null;
+        }
+
+        return bitcoinList;
+
     }
 
     //endregion

@@ -125,7 +125,7 @@ public class AppControllerTest
     @Test
     public void getAllNewsBitcoin1(){
         AppController appController = new AppController();
-        appController.getAllNewsBitcoin();
+        appController.setArticles(null);
 
         assertNull(appController.getAllNewsBitcoin());
     }
@@ -136,10 +136,22 @@ public class AppControllerTest
         List<Article> articleList = new ArrayList<Article>();
         articleList.add(new Article("bobby", "bobby's great adventure"));
         articleList.add(new Article("boberts", "boberts' amazing adventure"));
+        articleList.add(new Article("boberts", "babbe's amazing adventure"));
+        appController.setArticles(articleList);
+
+        assertNull(appController.getAllNewsBitcoin());
+    }
+
+    @Test
+    public void getAllNewsBitcoin3(){
+        AppController appController = new AppController();
+        List<Article> articleList = new ArrayList<Article>();
+        articleList.add(new Article("bobby", "bobby's great adventure"));
+        articleList.add(new Article("boberts", "boberts' amazing adventure"));
         articleList.add(new Article("boberts", "bitcoin's amazing adventure"));
         appController.setArticles(articleList);
 
-        assertEquals(articleList, appController.getAllNewsBitcoin());
+        assertEquals(appController.filterList("bitcoin", articleList), appController.getAllNewsBitcoin());
     }
 
     @Test
