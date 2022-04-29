@@ -1,12 +1,14 @@
 package at.ac.fhcampuswien;
 
 import at.ac.fhcampuswien.enums.*;
+import com.google.gson.Gson;
 import com.kwabenaberko.newsapilib.NewsApiClient;
 import com.kwabenaberko.newsapilib.models.request.EverythingRequest;
 import com.kwabenaberko.newsapilib.models.request.SourcesRequest;
 import com.kwabenaberko.newsapilib.models.request.TopHeadlinesRequest;
 import com.kwabenaberko.newsapilib.models.response.ArticleResponse;
 import com.kwabenaberko.newsapilib.models.response.SourcesResponse;
+import okhttp3.OkHttpClient;
 
 public class NewsApi {
 
@@ -15,7 +17,10 @@ public class NewsApi {
     private static final String sources = "https://newsapi.org/v2/top-headlines/sources?";
     private static final String apiKey = "f4d4ec56134741e8a937aa730e1ca155";
 
-    NewsApiClient newsApiClient = new NewsApiClient(apiKey);
+    private static final OkHttpClient client = new OkHttpClient();
+    private static final Gson gson = new Gson();
+
+    NewsApiClient newsApiClient = new NewsApiClient("f4d4ec56134741e8a937aa730e1ca155");
 
     public String getURL(Endpoint endPoint, String q, Language language, SortBy sortBy, Country country, Category category)
     {
@@ -46,6 +51,11 @@ public class NewsApi {
                     @Override
                     public void onSuccess(ArticleResponse response) {
                         System.out.println(response.getArticles().get(0).getTitle());
+
+                        String json = response.getArticles().toString();
+
+                        System.out.println(json);
+
                     }
 
                     @Override
