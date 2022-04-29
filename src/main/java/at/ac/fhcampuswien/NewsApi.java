@@ -9,8 +9,13 @@ import com.kwabenaberko.newsapilib.models.request.TopHeadlinesRequest;
 import com.kwabenaberko.newsapilib.models.response.ArticleResponse;
 import com.kwabenaberko.newsapilib.models.response.SourcesResponse;
 import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.Response;
 
-public class NewsApi {
+import java.io.IOException;
+
+public class NewsApi
+{
 
     private static final String everything = "https://newsapi.org/v2/everything?";
     private static final String topHeadlines = "https://newsapi.org/v2/top-headlines?";
@@ -22,7 +27,7 @@ public class NewsApi {
 
     NewsApiClient newsApiClient = new NewsApiClient("f4d4ec56134741e8a937aa730e1ca155");
 
-    public String getURL(Endpoint endPoint, String q, Language language, SortBy sortBy, Country country, Category category)
+    private static String getURL(Endpoint endPoint, String q, Language language, SortBy sortBy, Country country, Category category)
     {
         String url = "";
 
@@ -32,90 +37,38 @@ public class NewsApi {
 
             case EVERYTHING -> url = everything + "q=" + q + "&language=" + language + "&sortBy=" + sortBy + "&apiKey=" + apiKey;
 
-            case TOP_HEADLINES -> url = topHeadlines + "country="+ country + "&category=" + category + "&q=" + q + "&apiKey=" + apiKey;
+            case TOP_HEADLINES -> url = topHeadlines + "country=" + country + "&category=" + category + "&q=" + q + "&apiKey=" + apiKey;
         }
 
         return url;
     }
 
-    public NewsResponse everyThing(String q, Language language, SortBy sortBy)
+    private static NewsResponse request(String url)
     {
-        // /v2/everything
-        newsApiClient.getEverything(
-                new EverythingRequest.Builder()
-                        .q(q)
-                        .language(language.label)
-                        .sortBy(sortBy.sortby)
-                        .build(),
-                new NewsApiClient.ArticlesResponseCallback() {
-                    @Override
-                    public void onSuccess(ArticleResponse response) {
-                        System.out.println(response.getArticles().get(0).getTitle());
+        Request request = new Request.Builder().url(url).build();
 
-                        String json = response.getArticles().toString();
-
-                        System.out.println(json);
-
-                    }
-
-                    @Override
-                    public void onFailure(Throwable throwable) {
-                        System.out.println(throwable.getMessage());
-                    }
-                }
-        );
-
-        return null;
+        try (Response response = client.newCall(request).execute())
+        {
+            String json = response.body().string();
+            return gson.fromJson(json, NewsResponse.class);
+        } catch (IOException e)
+        {
+            throw new RuntimeException(e);
+        }
     }
 
-    public NewsResponse getTopHeadlines(String q, Language language, Country country, Category category)
+    public static NewsResponse getEverything(String q, Language language, SortBy sortBy)
     {
-        // /v2/top-headlines
-        newsApiClient.getTopHeadlines(
-                new TopHeadlinesRequest.Builder()
-                        .q(q)
-                        .language(language.label)
-                        .category(category.category)
-                        .country(country.countrycode)
-                        .build(),
-
-                new NewsApiClient.ArticlesResponseCallback() {
-                    @Override
-                    public void onSuccess(ArticleResponse response) {
-                        System.out.println(response.getArticles().get(0).getTitle());
-                    }
-
-                    @Override
-                    public void onFailure(Throwable throwable) {
-                        System.out.println(throwable.getMessage());
-                    }
-                }
-        );
-        return null;
+        return request(getURL(Endpoint.EVERYTHING, q, language, sortBy, null, null));
     }
 
-    public NewsResponse getSources(Language language, Country country, Category category)
+    public static NewsResponse getTopHeadlines(String q, Language language, Country country, Category category)
     {
-        // /v2/top-headlines/sources
-        newsApiClient.getSources(
-                new SourcesRequest.Builder()
-                        .language(language.label)
-                        .country(country.countrycode)
-                        .category(category.category)
-                        .build(),
-                new NewsApiClient.SourcesCallback() {
-                    @Override
-                    public void onSuccess(SourcesResponse response) {
-                        System.out.println(response.getSources().get(0).getName());
-                    }
+        return request(getURL(Endpoint.TOP_HEADLINES, q, language, null, country, category));
+    }
 
-                    @Override
-                    public void onFailure(Throwable throwable) {
-                        System.out.println(throwable.getMessage());
-                    }
-                }
-        );
-
-        return null;
+    public static NewsResponse getSources(Language language, Country country, Category category)
+    {
+        return request(getURL(Endpoint.SOURCES, null, null, null, country, category));
     }
 }
