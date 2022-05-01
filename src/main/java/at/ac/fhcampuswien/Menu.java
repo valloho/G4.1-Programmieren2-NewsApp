@@ -12,6 +12,7 @@ public class Menu {
     public void start(){
         Scanner scanner = new Scanner(System.in);
         printMenu();
+        System.out.println();
         handleInput(scanner.next());
     }
 
