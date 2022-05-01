@@ -53,7 +53,8 @@ public class Article {
 
     //toString function for Author and Title
     @Override
-    public String toString(){
+    public String toString()
+    {
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append(System.lineSeparator());
 
