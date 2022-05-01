@@ -17,6 +17,7 @@ public class AppController {
     private List<Article> articles;
 
     public AppController() {
+
     }
 
     //region SETTER ----------------------------------------------------------------------------------------------------
@@ -52,9 +53,9 @@ public class AppController {
     }
 
     /**
-     * Searches for all articles from Austria (in German) with the query "ukraine"
+     * Not implemented yet!
      *
-     * @return a list of articles from Austria about Ukraine
+     * @return Empty array list of articles
      */
     public List<Article> getTopHeadLinesAustria() {
 
