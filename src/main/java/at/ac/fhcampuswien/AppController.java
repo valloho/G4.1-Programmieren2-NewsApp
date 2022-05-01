@@ -61,6 +61,8 @@ public class AppController {
 
         articles = NewsApi.getTopHeadlines("ukraine", Language.GERMAN, Country.AUSTRIA, Category.GENERAL).getArticles();
 
+        System.out.println(articles);
+
         if (articles == null) {
             return new ArrayList<>();
         }
