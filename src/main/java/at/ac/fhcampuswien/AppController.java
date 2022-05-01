@@ -1,14 +1,20 @@
 package at.ac.fhcampuswien;
 
+import at.ac.fhcampuswien.enums.SortBy;
+import com.kwabenaberko.newsapilib.NewsApiClient;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+
+import static at.ac.fhcampuswien.enums.Language.ENGLISH;
 
 /**
  * Manages a list of articles
  */
 public class AppController {
     private List<Article> articles;
+    NewsApi newsApi = new NewsApi();
 
     public AppController() {
 
@@ -65,7 +71,11 @@ public class AppController {
      * @return A list of articles about bitcoins
      */
     public List<Article> getAllNewsBitcoin() {
-        if (articles == null){
+
+        articles = newsApi.getEverything("bitcoin", ENGLISH, SortBy.POPULARITY);
+        return articles;
+
+        /*if (articles == null){
             return null;
         }
 
@@ -76,6 +86,8 @@ public class AppController {
         }
 
         return bitcoinList;
+
+        */
 
     }
 
