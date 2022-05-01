@@ -119,19 +119,19 @@ public class AppController {
             Article newArticle = null;
             switch (articleNumber) {
                 case 0:
-                    newArticle = new Article("Derek Landy", "Skulduggery Pleasant: And he's the good guy");
+                    newArticle = new Article("Derek Landy", "Skulduggery Pleasant: And he's the good guy", "description", "www.newsapi.com", "urlToImage", "1-1-2000","content");
                     break;
                 case 1:
-                    newArticle = new Article("Agatha Christi", "Alibi");
+                    newArticle = new Article("Agatha Christi", "Alibi", "description", "www.newsapi.com", "urlToImage", "1-1-2000","content");
                     break;
                 case 2:
-                    newArticle = new Article("Rick Riordan", "Percy Jackson");
+                    newArticle = new Article("Rick Riordan", "Percy Jackson", "description", "www.newsapi.com", "urlToImage", "1-1-2000","content");
                     break;
                 case 3:
-                    newArticle = new Article("Michael Ende", "Momo");
+                    newArticle = new Article("Michael Ende", "Momo", "description", "www.newsapi.com", "urlToImage", "1-1-2000","content");
                     break;
                 case 4:
-                    newArticle = new Article("Markus Heitz", "Zwerge");
+                    newArticle = new Article("Markus Heitz", "Zwerge", "description", "www.newsapi.com", "urlToImage", "1-1-2000","content");
             }
             newArticles.add(newArticle);
         }

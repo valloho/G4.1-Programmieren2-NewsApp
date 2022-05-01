@@ -20,7 +20,7 @@ public class AppControllerTest
 
         for (int i = 0; i < 3; i++)
         {
-            articles.add(new Article("bob", "bob's adventure"));
+            articles.add(new Article("bob", "bob's adventure", "description", "www.newsapi.com", "urlToImage", "1-1-2000","content"));
         }
 
         appController.setArticles(articles);
@@ -39,7 +39,7 @@ public class AppControllerTest
 
         for (int i = 0; i < 6; i++)
         {
-            articles.add(new Article("bob", "bob's adventure"));
+            articles.add(new Article("bob", "bob's adventure", "description", "www.newsapi.com", "urlToImage", "1-1-2000","content"));
         }
 
         appController.setArticles(articles);
@@ -74,8 +74,8 @@ public class AppControllerTest
 
         AppController appController = new AppController();
         List<Article> articleList = new ArrayList<Article>();
-        articleList.add(new Article("bobby", "bobby's great adventure"));
-        articleList.add(new Article("boberts", "boberts' amazing adventure"));
+        articleList.add(new Article("bobby", "bobby's great adventure", "description", "www.newsapi.com", "urlToImage", "1-1-2000","content"));
+        articleList.add(new Article("boberts", "boberts' amazing adventure", "description", "www.newsapi.com", "urlToImage", "1-1-2000","content"));
         appController.setArticles(articleList);
 
         assertEquals(articleList, appController.getArticles());
@@ -87,11 +87,11 @@ public class AppControllerTest
 
         AppController appController = new AppController();
         List<Article> articleList = new ArrayList<Article>();
-        articleList.add(new Article("bobby", "bobby's great adventure"));
-        articleList.add(new Article("boberts", "boberts' amazing adventure"));
-        articleList.add(new Article("bobbie", "bobbie's shining adventure"));
-        articleList.add(new Article("bubba", "bubba's shrimp company"));
-        articleList.add(new Article("brobob", "brobob's confusing adventure"));
+        articleList.add(new Article("bobby", "bobby's great adventure", "description", "www.newsapi.com", "urlToImage", "1-1-2000","content"));
+        articleList.add(new Article("boberts", "boberts' amazing adventure", "description", "www.newsapi.com", "urlToImage", "1-1-2000","content"));
+        articleList.add(new Article("bobbie", "bobbie's shining adventure", "description", "www.newsapi.com", "urlToImage", "1-1-2000","content"));
+        articleList.add(new Article("bubba", "bubba's shrimp company", "description", "www.newsapi.com", "urlToImage", "1-1-2000","content"));
+        articleList.add(new Article("brobob", "brobob's confusing adventure", "description", "www.newsapi.com", "urlToImage", "1-1-2000","content"));
         appController.setArticles(articleList);
 
         assertEquals(articleList, appController.getArticles());
@@ -113,9 +113,9 @@ public class AppControllerTest
 
         AppController appController = new AppController();
         List<Article> articleList = new ArrayList<Article>();
-        articleList.add(new Article("bobby", "bobby's great adventure"));
-        articleList.add(new Article("boberts", "boberts' amazing adventure"));
-        articleList.add(new Article("bobbie", "bobbie's shining adventure"));
+        articleList.add(new Article("bobby", "bobby's great adventure", "description", "www.newsapi.com", "urlToImage", "1-1-2000","content"));
+        articleList.add(new Article("boberts", "boberts' amazing adventure", "description", "www.newsapi.com", "urlToImage", "1-1-2000","content"));
+        articleList.add(new Article("bobbie", "bobbie's shining adventure", "description", "www.newsapi.com", "urlToImage", "1-1-2000","content"));
         appController.setArticles(articleList);
 
         assertEquals(articleList, appController.getTopHeadLinesAustria());
@@ -134,9 +134,9 @@ public class AppControllerTest
     public void getAllNewsBitcoin2(){
         AppController appController = new AppController();
         List<Article> articleList = new ArrayList<Article>();
-        articleList.add(new Article("bobby", "bobby's great adventure"));
-        articleList.add(new Article("boberts", "boberts' amazing adventure"));
-        articleList.add(new Article("boberts", "babbe's amazing adventure"));
+        articleList.add(new Article("bobby", "bobby's great adventure", "description", "www.newsapi.com", "urlToImage", "1-1-2000","content"));
+        articleList.add(new Article("boberts", "boberts' amazing adventure", "description", "www.newsapi.com", "urlToImage", "1-1-2000","content"));
+        articleList.add(new Article("boberts", "babbe's amazing adventure", "description", "www.newsapi.com", "urlToImage", "1-1-2000","content"));
         appController.setArticles(articleList);
 
         assertNull(appController.getAllNewsBitcoin());
@@ -146,9 +146,9 @@ public class AppControllerTest
     public void getAllNewsBitcoin3(){
         AppController appController = new AppController();
         List<Article> articleList = new ArrayList<Article>();
-        articleList.add(new Article("bobby", "bobby's great adventure"));
-        articleList.add(new Article("boberts", "boberts' amazing adventure"));
-        articleList.add(new Article("boberts", "bitcoin's amazing adventure"));
+        articleList.add(new Article("bobby", "bobby's great adventure", "description", "www.newsapi.com", "urlToImage", "1-1-2000","content"));
+        articleList.add(new Article("boberts", "boberts' amazing adventure", "description", "www.newsapi.com", "urlToImage", "1-1-2000","content"));
+        articleList.add(new Article("boberts", "bitcoin's amazing adventure", "description", "www.newsapi.com", "urlToImage", "1-1-2000","content"));
         appController.setArticles(articleList);
 
         assertEquals(appController.filterList("bitcoin", articleList), appController.getAllNewsBitcoin());
@@ -159,8 +159,8 @@ public class AppControllerTest
 
         AppController appController = new AppController();
         List<Article> articleList = new ArrayList<Article>();
-        articleList.add(new Article("bobby", "bobby's great adventure"));
-        articleList.add(new Article("boberts", "boberts' amazing adventure"));
+        articleList.add(new Article("bobby", "bobby's great adventure", "description", "www.newsapi.com", "urlToImage", "1-1-2000","content"));
+        articleList.add(new Article("boberts", "boberts' amazing adventure", "description", "www.newsapi.com", "urlToImage", "1-1-2000","content"));
         appController.setArticles(articleList);
 
         assertEquals(articleList.get(0), appController.filterList("bobby", articleList).get(0));
@@ -171,9 +171,9 @@ public class AppControllerTest
 
         AppController appController = new AppController();
         List<Article> articleList = new ArrayList<Article>();
-        articleList.add(new Article("bobby", "bobby's great adventure"));
-        articleList.add(new Article("bobby", "bobby's amazing adventure"));
-        articleList.add(new Article("bobby", "bobby's amazing adventure 2"));
+        articleList.add(new Article("bobby", "bobby's great adventure", "description", "www.newsapi.com", "urlToImage", "1-1-2000","content"));
+        articleList.add(new Article("bobby", "bobby's amazing adventure", "description", "www.newsapi.com", "urlToImage", "1-1-2000","content"));
+        articleList.add(new Article("bobby", "bobby's amazing adventure 2", "description", "www.newsapi.com", "urlToImage", "1-1-2000","content"));
         appController.setArticles(articleList);
 
         assertEquals(articleList, appController.filterList("bobby", articleList));
@@ -184,8 +184,8 @@ public class AppControllerTest
 
         AppController appController = new AppController();
         List<Article> articleList = new ArrayList<Article>();
-        articleList.add(new Article("bobby", "bobby's great adventure"));
-        articleList.add(new Article("boberts", "boberts' amazing adventure"));
+        articleList.add(new Article("bobby", "bobby's great adventure", "description", "www.newsapi.com", "urlToImage", "1-1-2000","content"));
+        articleList.add(new Article("boberts", "boberts' amazing adventure", "description", "www.newsapi.com", "urlToImage", "1-1-2000","content"));
         appController.setArticles(articleList);
 
         assertNull(appController.filterList("boberta", articleList));
