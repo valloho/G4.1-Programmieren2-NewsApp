@@ -54,8 +54,31 @@ public class Article {
     //toString function for Author and Title
     @Override
     public String toString(){
-        return "Author: " + this.author + " , Title: " + this.title + System.lineSeparator() + "Description: " +
-                this.description + System.lineSeparator() + "Url: " + this.url + System.lineSeparator() + "UrlToImage: " + this.urlToImage + System.lineSeparator() +  "PublishedAt: " + this.publishedAt + System.lineSeparator() +
-                "Content: " + this.content + System.lineSeparator();
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append(System.lineSeparator());
+
+        if(this.author != null){
+            stringBuilder.append("Author: ").append(this.author).append(System.lineSeparator());
+        }
+        if(this.title != null){
+            stringBuilder.append("Title: ").append(this.title).append(System.lineSeparator());
+        }
+        if (this.description != null){
+            stringBuilder.append("Description: ").append(this.description).append(System.lineSeparator());
+        }
+        if (this.url != null) {
+            stringBuilder.append("URL: ").append(this.url).append(System.lineSeparator());
+        }
+        if (this.urlToImage != null) {
+            stringBuilder.append("URLToImage: ").append(this.urlToImage).append(System.lineSeparator());
+        }
+        if (this.publishedAt != null) {
+            stringBuilder.append("PublishedAt: ").append(this.publishedAt).append(System.lineSeparator());
+        }
+        if (this.content != null) {
+            stringBuilder.append("Content: ").append(this.content).append(System.lineSeparator());
+        }
+
+        return stringBuilder.toString();
     }
 }
