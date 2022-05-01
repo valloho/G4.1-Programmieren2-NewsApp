@@ -1,12 +1,12 @@
 package at.ac.fhcampuswien;
 
-import java.util.ArrayList;
+import java.util.List;
 
 public class NewsResponse
 {
     String status = "";
     int totalResult = 0;
-    ArrayList<Article> articles = new ArrayList<>();
+    List<Article> articles;
 
     public String getStatusString() {
         return status;
@@ -16,7 +16,7 @@ public class NewsResponse
         return totalResult;
     }
     
-    public ArrayList<Article> getArticles() {
+    public List<Article> getArticles() {
         return articles;
     }
 }

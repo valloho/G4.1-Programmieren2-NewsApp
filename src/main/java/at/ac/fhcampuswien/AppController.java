@@ -1,20 +1,19 @@
 package at.ac.fhcampuswien;
 
+import at.ac.fhcampuswien.enums.Category;
+import at.ac.fhcampuswien.enums.Country;
 import at.ac.fhcampuswien.enums.SortBy;
-import com.kwabenaberko.newsapilib.NewsApiClient;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-import static at.ac.fhcampuswien.enums.Language.ENGLISH;
+import static at.ac.fhcampuswien.enums.Language.*;
 
 /**
  * Manages a list of articles
  */
 public class AppController {
     private List<Article> articles;
-    NewsApi newsApi = new NewsApi();
 
     public AppController() {
 
@@ -59,11 +58,14 @@ public class AppController {
      * @return Empty array list of articles
      */
     public List<Article> getTopHeadLinesAustria() {
+
+        articles = NewsApi.getTopHeadlines("ukraine", GERMAN, Country.AUSTRIA, Category.GENERAL).getArticles();
+
         if (articles == null) {
             return new ArrayList<>();
-        }else{
-            return getArticles();
         }
+
+        return articles;
     }
 
     /**
@@ -72,7 +74,12 @@ public class AppController {
      */
     public List<Article> getAllNewsBitcoin() {
 
-        articles = newsApi.getEverything("bitcoin", ENGLISH, SortBy.POPULARITY);
+        articles = NewsApi.getEverything("bitcoin", ENGLISH, SortBy.POPULARITY).getArticles();
+
+        if (articles == null){
+            return null;
+        }
+
         return articles;
 
         /*if (articles == null){
