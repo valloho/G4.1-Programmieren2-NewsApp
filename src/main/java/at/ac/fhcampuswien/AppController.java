@@ -4,6 +4,7 @@ import at.ac.fhcampuswien.enums.Category;
 import at.ac.fhcampuswien.enums.Country;
 import at.ac.fhcampuswien.enums.Language;
 import at.ac.fhcampuswien.enums.SortBy;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -41,7 +42,6 @@ public class AppController {
         if (articles == null) {
             return 0;
         }
-
         return this.articles.size();
     }
 
@@ -61,45 +61,25 @@ public class AppController {
 
         articles = NewsApi.getTopHeadlines("ukraine", Language.GERMAN, Country.AUSTRIA, Category.GENERAL).getArticles();
 
-        System.out.println(articles);
-
         if (articles == null) {
             return new ArrayList<>();
         }
-
         return articles;
     }
 
     /**
      * Searches for all articles with the query "bitcoin".
+     *
      * @return A list of articles about bitcoins
      */
     public List<Article> getAllNewsBitcoin() {
 
         articles = NewsApi.getEverything("bitcoin", Language.ENGLISH, SortBy.RELEVANCY).getArticles();
 
-        System.out.println(articles); //testzwecke
-
-        if (articles == null){
+        if (articles == null) {
             return null;
         }
-
         return articles;
-
-        /*
-        if (articles == null){
-            return null;
-        }
-
-        List<Article> bitcoinList = filterList("bitcoin", articles);
-
-        if (bitcoinList == null || bitcoinList.size() == 0){
-            return null;
-        }
-
-        return bitcoinList;
-        */
-
     }
 
     //endregion
@@ -142,19 +122,19 @@ public class AppController {
             Article newArticle = null;
             switch (articleNumber) {
                 case 0:
-                    newArticle = new Article("Derek Landy", "Skulduggery Pleasant: And he's the good guy", "description", "www.newsapi.com", "urlToImage", "1-1-2000","content");
+                    newArticle = new Article("Derek Landy", "Skulduggery Pleasant: And he's the good guy", "description", "www.newsapi.com", "urlToImage", "1-1-2000", "content");
                     break;
                 case 1:
-                    newArticle = new Article("Agatha Christi", "Alibi", "description", "www.newsapi.com", "urlToImage", "1-1-2000","content");
+                    newArticle = new Article("Agatha Christi", "Alibi", "description", "www.newsapi.com", "urlToImage", "1-1-2000", "content");
                     break;
                 case 2:
-                    newArticle = new Article("Rick Riordan", "Percy Jackson", "description", "www.newsapi.com", "urlToImage", "1-1-2000","content");
+                    newArticle = new Article("Rick Riordan", "Percy Jackson", "description", "www.newsapi.com", "urlToImage", "1-1-2000", "content");
                     break;
                 case 3:
-                    newArticle = new Article("Michael Ende", "Momo", "description", "www.newsapi.com", "urlToImage", "1-1-2000","content");
+                    newArticle = new Article("Michael Ende", "Momo", "description", "www.newsapi.com", "urlToImage", "1-1-2000", "content");
                     break;
                 case 4:
-                    newArticle = new Article("Markus Heitz", "Zwerge", "description", "www.newsapi.com", "urlToImage", "1-1-2000","content");
+                    newArticle = new Article("Markus Heitz", "Zwerge", "description", "www.newsapi.com", "urlToImage", "1-1-2000", "content");
             }
             newArticles.add(newArticle);
         }

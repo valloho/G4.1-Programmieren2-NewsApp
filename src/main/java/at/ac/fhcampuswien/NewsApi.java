@@ -2,13 +2,11 @@ package at.ac.fhcampuswien;
 
 import at.ac.fhcampuswien.enums.*;
 import com.google.gson.Gson;
-import com.kwabenaberko.newsapilib.NewsApiClient;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
 
 import java.io.IOException;
-import java.util.List;
 
 public class NewsApi {
 
@@ -20,7 +18,6 @@ public class NewsApi {
     private static final OkHttpClient client = new OkHttpClient();
     private static final Gson gson = new Gson();
 
-    NewsApiClient newsApiClient = new NewsApiClient("f4d4ec56134741e8a937aa730e1ca155");
 
     private static String getURL(Endpoint endPoint, String q, Language language, SortBy sortBy, Country country, Category category) {
         String url = "";

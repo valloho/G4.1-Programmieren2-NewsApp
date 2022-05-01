@@ -12,15 +12,26 @@ public class Menu {
     public void start(){
         Scanner scanner = new Scanner(System.in);
         printMenu();
-        System.out.println();
         handleInput(scanner.next());
     }
 
     private void handleInput(String input){
         switch (input) {
-            case "a" -> getTopHeadlinesAustria(controller);
-            case "b" -> getAllNewsBitcoin(controller);
-            case "y" -> getArticleCount(controller);
+            case "a" -> {
+                getTopHeadlinesAustria(controller);
+                System.out.println();
+                start();
+            }
+            case "b" -> {
+                getAllNewsBitcoin(controller);
+                System.out.println();
+                start();
+            }
+            case "y" -> {
+                getArticleCount(controller);
+                System.out.println();
+                start();
+            }
             case "q" -> printExitMessage();
             default -> {
                 printInvalidInputMessage();
@@ -31,15 +42,15 @@ public class Menu {
     }
 
     private void getTopHeadlinesAustria(AppController ctrl){
-        ctrl.getTopHeadLinesAustria();
+        System.out.println(ctrl.getTopHeadLinesAustria());
     }
 
     private void getAllNewsBitcoin(AppController ctrl){
-        ctrl.getAllNewsBitcoin();
+        System.out.println(ctrl.getAllNewsBitcoin());
     }
 
     private void getArticleCount(AppController ctrl){
-        ctrl.getArticleCount();
+        System.out.println("No. of Articles: " + ctrl.getArticleCount());
     }
 
     private static void printInvalidInputMessage(){
@@ -59,5 +70,6 @@ public class Menu {
         System.out.println("b: Get all news about bitcoin");
         System.out.println("y: Count articles");
         System.out.println("q: Quit program");
+        System.out.println();
     }
 }
