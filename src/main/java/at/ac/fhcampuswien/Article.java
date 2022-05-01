@@ -54,8 +54,8 @@ public class Article {
     //toString function for Author and Title
     @Override
     public String toString(){
-        return "Author: " + this.author + " , Title: " + this.title + "%nDescription: " +
-                this.description + "%nUrl: " + this.url + "%nUrlToImage: " + this.urlToImage + "%nPublishedAt: " + this.publishedAt +
-                "%nContent: " + this.content;
+        return "Author: " + this.author + " , Title: " + this.title + "Description: " +
+                this.description + System.lineSeparator() + "Url: " + this.url + System.lineSeparator() + "UrlToImage: " + this.urlToImage + System.lineSeparator() +  "PublishedAt: " + this.publishedAt + System.lineSeparator() +
+                "Content: " + this.content;
     }
 }
