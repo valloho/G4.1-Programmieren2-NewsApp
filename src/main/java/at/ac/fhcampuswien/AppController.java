@@ -2,12 +2,12 @@ package at.ac.fhcampuswien;
 
 import at.ac.fhcampuswien.enums.Category;
 import at.ac.fhcampuswien.enums.Country;
+import at.ac.fhcampuswien.enums.Language;
 import at.ac.fhcampuswien.enums.SortBy;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-import static at.ac.fhcampuswien.enums.Language.*;
 
 /**
  * Manages a list of articles
@@ -59,7 +59,7 @@ public class AppController {
      */
     public List<Article> getTopHeadLinesAustria() {
 
-        articles = NewsApi.getTopHeadlines("ukraine", GERMAN, Country.AUSTRIA, Category.GENERAL).getArticles();
+        articles = NewsApi.getTopHeadlines("ukraine", Language.GERMAN, Country.AUSTRIA, Category.GENERAL).getArticles();
 
         if (articles == null) {
             return new ArrayList<>();
@@ -74,7 +74,9 @@ public class AppController {
      */
     public List<Article> getAllNewsBitcoin() {
 
-        articles = NewsApi.getEverything("bitcoin", ENGLISH, SortBy.POPULARITY).getArticles();
+        articles = NewsApi.getEverything("bitcoin", Language.ENGLISH, SortBy.RELEVANCY).getArticles();
+
+        System.out.println(articles); //testzwecke
 
         if (articles == null){
             return null;
@@ -82,7 +84,8 @@ public class AppController {
 
         return articles;
 
-        /*if (articles == null){
+        /*
+        if (articles == null){
             return null;
         }
 
@@ -93,7 +96,6 @@ public class AppController {
         }
 
         return bitcoinList;
-
         */
 
     }
