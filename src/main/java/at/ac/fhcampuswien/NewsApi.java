@@ -2,11 +2,14 @@ package at.ac.fhcampuswien;
 
 import at.ac.fhcampuswien.enums.*;
 import com.google.gson.Gson;
+import com.google.gson.JsonSyntaxException;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
 
 import java.io.IOException;
+import java.net.UnknownHostException;
+import java.util.Objects;
 
 public class NewsApi {
 
@@ -35,14 +38,16 @@ public class NewsApi {
     private static NewsResponse request(String url) {
         Request request = new Request.Builder().url(url).build();
 
-        try (Response response = client.newCall(request).execute()) {
-            String json = response.body().string();
+        try (Response response = client.newCall(request).execute())
+        {
+            String json = Objects.requireNonNull(response.body()).string();
             return gson.fromJson(json, NewsResponse.class);
-        } catch (IOException e) {
+        }
+        catch (IOException e)
+        {
             throw new RuntimeException(e);
         }
     }
-
     public static NewsResponse getEverything(String q, Language language, SortBy sortBy) {
         return request(getURL(Endpoint.EVERYTHING, q, language, sortBy, null, null));
     }
