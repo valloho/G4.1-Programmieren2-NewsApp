@@ -36,18 +36,30 @@ public class NewsApi {
     }
 
     private static NewsResponse request(String url) {
-        Request request = new Request.Builder().url(url).build();
-
-        try (Response response = client.newCall(request).execute())
-        {
+        try {
+            Request request = new Request.Builder().url(url).build();
+            Response response = client.newCall(request).execute();
             String json = Objects.requireNonNull(response.body()).string();
             return gson.fromJson(json, NewsResponse.class);
-        }
-        catch (IOException e)
-        {
-            throw new RuntimeException(e);
+        } catch (UnknownHostException e) {
+            client.dispatcher().executorService().shutdown();
+            System.out.println("Überprüfe deine Internetverbindung");
+            return null;
+        } catch (IllegalArgumentException e) {
+            System.out.println("Falsche URL");
+            return null;
+        } catch (JsonSyntaxException e){
+            System.out.println("False Json Syntax");
+            return null;
+        } catch (IllegalStateException e){
+            System.out.println("Illegales Json Statement");
+            return null;
+        } catch (IOException e) {
+            System.out.println("Der Irgendwas Fehler");
+            return null;
         }
     }
+
     public static NewsResponse getEverything(String q, Language language, SortBy sortBy) {
         return request(getURL(Endpoint.EVERYTHING, q, language, sortBy, null, null));
     }
