@@ -76,9 +76,6 @@ public class AppController {
 
         articles = NewsApi.getEverything("bitcoin", Language.ENGLISH, SortBy.RELEVANCY).getArticles();
 
-        if (articles == null) {
-            return null;
-        }
         return articles;
     }
 

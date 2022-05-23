@@ -42,11 +42,19 @@ public class Menu {
     }
 
     private void getTopHeadlinesAustria(AppController ctrl){
-        System.out.println(ctrl.getTopHeadLinesAustria());
+        try {
+            System.out.println(ctrl.getTopHeadLinesAustria());
+        } catch (NullPointerException e){
+            System.out.println("There are no top headlines in Austria!");
+        }
     }
 
     private void getAllNewsBitcoin(AppController ctrl){
-        System.out.println(ctrl.getAllNewsBitcoin());
+        try {
+            System.out.println(ctrl.getAllNewsBitcoin());
+        } catch (NullPointerException e){
+            System.out.println("There are no news about bitcoin!");
+        }
     }
 
     private void getArticleCount(AppController ctrl){
