@@ -190,4 +190,19 @@ public class AppControllerTest
 
         assertNull(appController.filterList("boberta", articleList));
     }
+
+    @Test
+    public void getTitlesLessThan15Test1(){
+        AppController appController = new AppController();
+        List<Article> articleList = new ArrayList<Article>();
+        articleList.add(new Article("bobby", "bobby", "description", "www.newsapi.com", "urlToImage", "1-1-2000","content"));
+        articleList.add(new Article("boberts", "boberts' amazing adventure", "description", "www.newsapi.com", "urlToImage", "1-1-2000","content"));
+        articleList.add(new Article("bobbie", "bobbie's shining adventureeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee", "description", "www.newsapi.com", "urlToImage", "1-1-2000","content"));
+        articleList.add(new Article("bubba", "bubba's shrimp company", "description", "www.newsapi.com", "urlToImage", "1-1-2000","content"));
+        articleList.add(new Article("brobob", "brobob's confusing adventure", "description", "www.newsapi.com", "urlToImage", "1-1-2000","content"));
+        appController.setArticles(articleList);
+
+        assertEquals(articleList, appController.getTitlesLessThan15());
+
+    }
 }
