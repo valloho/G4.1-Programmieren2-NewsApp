@@ -116,23 +116,14 @@ public class AppController {
         for (int i = 0; i < articleAmount; i++) {
             int articleNumber = random.nextInt(5);
 
-            Article newArticle = null;
-            switch (articleNumber) {
-                case 0:
-                    newArticle = new Article("Derek Landy", "Skulduggery Pleasant: And he's the good guy", "description", "www.newsapi.com", "urlToImage", "1-1-2000", "content");
-                    break;
-                case 1:
-                    newArticle = new Article("Agatha Christi", "Alibi", "description", "www.newsapi.com", "urlToImage", "1-1-2000", "content");
-                    break;
-                case 2:
-                    newArticle = new Article("Rick Riordan", "Percy Jackson", "description", "www.newsapi.com", "urlToImage", "1-1-2000", "content");
-                    break;
-                case 3:
-                    newArticle = new Article("Michael Ende", "Momo", "description", "www.newsapi.com", "urlToImage", "1-1-2000", "content");
-                    break;
-                case 4:
-                    newArticle = new Article("Markus Heitz", "Zwerge", "description", "www.newsapi.com", "urlToImage", "1-1-2000", "content");
-            }
+            Article newArticle = switch (articleNumber) {
+                case 0 -> new Article("Derek Landy", "Skulduggery Pleasant: And he's the good guy", "description", "www.newsapi.com", "urlToImage", "1-1-2000", "content");
+                case 1 -> new Article("Agatha Christi", "Alibi", "description", "www.newsapi.com", "urlToImage", "1-1-2000", "content");
+                case 2 -> new Article("Rick Riordan", "Percy Jackson", "description", "www.newsapi.com", "urlToImage", "1-1-2000", "content");
+                case 3 -> new Article("Michael Ende", "Momo", "description", "www.newsapi.com", "urlToImage", "1-1-2000", "content");
+                case 4 -> new Article("Markus Heitz", "Zwerge", "description", "www.newsapi.com", "urlToImage", "1-1-2000", "content");
+                default -> null;
+            };
             newArticles.add(newArticle);
         }
 
