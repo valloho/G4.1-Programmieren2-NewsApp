@@ -42,6 +42,16 @@ public class Menu {
                 System.out.println();
                 start();
             }
+            case "m" -> {
+                mostArticleSource(controller);
+                System.out.println();
+                start();
+            }
+            case "n" -> {
+                newYorkTimes(controller);
+                System.out.println();
+                start();
+            }
             case "q" -> printExitMessage();
             default -> {
                 printInvalidInputMessage();
@@ -84,6 +94,26 @@ public class Menu {
         }
     }
 
+    private void mostArticleSource(AppController ctrl) {
+        String result = ctrl.outputMostArticleSource();
+        if (result == null) {
+            System.out.println("Not available");
+        }
+        else {
+            System.out.println("Most articles by : " + result);
+        }
+    }
+
+    private void newYorkTimes(AppController ctrl) {
+        long result = ctrl.checkForSpecificSource("New York Times");
+        if (result == 0) {
+            System.out.println("None");
+        }
+        else {
+            System.out.println("Articles published at New York Times : " + result);
+        }
+    }
+
     private static void printInvalidInputMessage(){
         System.out.println(INVALID_USER_INPUT_MESSAGE);
     }
@@ -103,6 +133,8 @@ public class Menu {
         /* Nico working on it
         System.out.println("l: Longest Author name");
         */
+        System.out.println("m: Most Article Source");
+        System.out.println("n: New York Times");
         System.out.println("r: Articles with titles smaller than 15 characters");
         System.out.println("q: Quit program");
         System.out.println();

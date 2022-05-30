@@ -4,6 +4,8 @@ import at.ac.fhcampuswien.enums.*;
 import jdk.dynalink.Operation;
 
 import java.util.*;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 
 
 /**
@@ -140,6 +142,24 @@ public class AppController {
         }
     }
 
+    public String outputMostArticleSource() {
+        String test = articles.stream().parallel().map(Article::getSource)
+            .collect(Collectors.groupingBy(Function.identity(), Collectors.counting()))
+            .entrySet().stream().parallel()
+            .max(Map.Entry.comparingByValue()).map(Map.Entry::getKey)
+            .orElse(null);
+        return test;
+    }  
+    
+    public long checkForSpecificSource(String sourceName) {
+        if (sourceName != null && sourceName != "") {
+            long count = articles.stream().filter(article -> sourceName.equals(article.getSource())).count();
+            return count;
+        }
+        else {
+            return 0;
+        }
+    }
     /**
      * Generates a list with dummy articles.
      *
@@ -155,19 +175,19 @@ public class AppController {
             Article newArticle = null;
             switch (articleNumber) {
                 case 0:
-                    newArticle = new Article("Derek Landy", "Skulduggery Pleasant: And he's the good guy", "description", "www.newsapi.com", "urlToImage", "1-1-2000", "content");
+                    /**newArticle = new Article("Derek Landy", "Skulduggery Pleasant: And he's the good guy", "description", "www.newsapi.com", "urlToImage", "1-1-2000", "content", new List<String>("test"));
                     break;
                 case 1:
-                    newArticle = new Article("Agatha Christi", "Alibi", "description", "www.newsapi.com", "urlToImage", "1-1-2000", "content");
+                    newArticle = new Article("Agatha Christi", "Alibi", "description", "www.newsapi.com", "urlToImage", "1-1-2000", "content", new String[]{"test"});
                     break;
                 case 2:
-                    newArticle = new Article("Rick Riordan", "Percy Jackson", "description", "www.newsapi.com", "urlToImage", "1-1-2000", "content");
+                    newArticle = new Article("Rick Riordan", "Percy Jackson", "description", "www.newsapi.com", "urlToImage", "1-1-2000", "content", new String[]{"test"});
                     break;
                 case 3:
-                    newArticle = new Article("Michael Ende", "Momo", "description", "www.newsapi.com", "urlToImage", "1-1-2000", "content");
+                    newArticle = new Article("Michael Ende", "Momo", "description", "www.newsapi.com", "urlToImage", "1-1-2000", "content", new String[]{"test"});
                     break;
-                case 4:
-                    newArticle = new Article("Markus Heitz", "Zwerge", "description", "www.newsapi.com", "urlToImage", "1-1-2000", "content");
+                case 4:*/
+                    /* newArticle = new Article("Markus Heitz", "Zwerge", "description", "www.newsapi.com", "urlToImage", "1-1-2000", "content", new String[]{"test"}); */
             }
             newArticles.add(newArticle);
         }
