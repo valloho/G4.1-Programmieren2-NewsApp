@@ -101,27 +101,17 @@ public class AppController {
         }
     }
 
-/*   Nico [nicht niggo] working on it
     /**
      * Searches the Articles for the Author with the longest name.
      **/
-    /*
+
     public String getLongestName(){
-        List<String> authors = new ArrayList<>();
         if (articles == null) {
             return "There are no authors yet!";
         }else {
-            for (Article article : articles) {
-                authors.add(article.getAuthor());
-            }
-            System.out.println(authors);
-            String result = authors.stream().
-                    max(author -> author.length());
-            System.out.println(result);
-            return null;
+            return articles.stream().max(Comparator.comparingInt(Article::getAuthorLength)).orElse(null).getAuthor();
         }
     }
-    */
 
     /**
      * Searches for a list of Articles with a title that consists of less than 15 characters.
@@ -139,6 +129,34 @@ public class AppController {
                     }else {
                         return filteredArticles;
                     }
+        }
+    }
+    /**
+     * Orders the Articles based on the length of the description.
+     */
+    public List<Article> getOrderedBasedOnDescription(){
+        if (articles == null) {
+            return null;
+        }else {
+
+            return articles.stream()
+                    .sorted(Comparator.comparingInt(Article::getDescriptionLength).thenComparing(Article::getDescription))
+                    .collect(Collectors.toList());
+        }
+    }
+
+    /**
+     * Orders the Articles and outputs a short version with the title, description length and the description.
+     */
+    public List<String> getOrderedBasedOnDescriptionShort(){
+        List<String> orderedArticles = new ArrayList<>();
+        if (articles == null) {
+            return null;
+        }else {
+            articles.stream()
+                    .sorted(Comparator.comparingInt(Article::getDescriptionLength).thenComparing(Article::getDescription))
+                    .forEach(article -> orderedArticles.add("Title: " + article.getTitle() + "\n" + "Desc (length): " + article.getDescription().length() + "\n" + "Desc: " + article.getDescription() + "\n"));
+            return orderedArticles;
         }
     }
 
