@@ -8,10 +8,10 @@ import java.util.List;
 
 public class AppControllerTest
 {
-/*
+
     /**
      * Test if article count is 3 when there are 3 articles
-
+     */
     @Test
     public void getArticleCountTest1()
     {
@@ -28,12 +28,9 @@ public class AppControllerTest
         assertEquals(3, appController.getArticleCount());
     }
 
- */
-
-/*
     /**
      * Test if article count is 6 when there are 6 articles
-
+     */
     @Test
     public void getArticleCountTest2()
     {
@@ -50,12 +47,9 @@ public class AppControllerTest
         assertEquals(6, appController.getArticleCount());
     }
 
- */
-
-/*
     /**
      * Test if article count is 0 when null
-
+     */
     @Test
     public void getArticleCountTest3()
     {
@@ -196,6 +190,19 @@ public class AppControllerTest
 
         assertNull(appController.filterList("boberta", articleList));
     }
- */
-}
 
+    @Test
+    public void getTitlesLessThan15Test1(){
+        AppController appController = new AppController();
+        List<Article> articleList = new ArrayList<Article>();
+        articleList.add(new Article("bobby", "bobby", "description", "www.newsapi.com", "urlToImage", "1-1-2000","content"));
+        articleList.add(new Article("boberts", "boberts' amazing adventure", "description", "www.newsapi.com", "urlToImage", "1-1-2000","content"));
+        articleList.add(new Article("bobbie", "bobbie's shining adventureeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee", "description", "www.newsapi.com", "urlToImage", "1-1-2000","content"));
+        articleList.add(new Article("bubba", "bubba's shrimp company", "description", "www.newsapi.com", "urlToImage", "1-1-2000","content"));
+        articleList.add(new Article("brobob", "brobob's confusing adventure", "description", "www.newsapi.com", "urlToImage", "1-1-2000","content"));
+        appController.setArticles(articleList);
+
+        assertEquals(articleList, appController.getTitlesLessThan15());
+
+    }
+}

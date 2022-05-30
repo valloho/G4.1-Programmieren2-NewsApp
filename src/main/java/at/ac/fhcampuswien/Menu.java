@@ -32,6 +32,17 @@ public class Menu {
                 System.out.println();
                 start();
             }
+            /* Nico working on it
+            case "l" -> {
+                getLongestAuthor(controller);
+                System.out.println();
+                start();
+            }*/
+            case "r" -> {
+                getTitlesLessThan15(controller);
+                System.out.println();
+                start();
+            }
             case "q" -> printExitMessage();
             default -> {
                 printInvalidInputMessage();
@@ -60,6 +71,19 @@ public class Menu {
     private void getArticleCount(AppController ctrl){
         System.out.println("No. of Articles: " + ctrl.getArticleCount());
     }
+/*    (Nico [nicht niggo]: working on it
+    private void getLongestAuthor(AppController ctrl){
+        System.out.println("Longest Author name: " + ctrl.getLongestName());
+    }
+    */
+
+    private void getTitlesLessThan15(AppController ctrl){
+        if (ctrl.getTitlesLessThan15() == null){
+            System.out.println("There are no articles with titles smaller than 15 characters!");
+        }else {
+            System.out.println("Articles with titles smaller than 15 characters: " + ctrl.getTitlesLessThan15());
+        }
+    }
 
     private static void printInvalidInputMessage(){
         System.out.println(INVALID_USER_INPUT_MESSAGE);
@@ -77,6 +101,10 @@ public class Menu {
         System.out.println("a: Get top headlines austria");
         System.out.println("b: Get all news about bitcoin");
         System.out.println("y: Count articles");
+        /* Nico working on it
+        System.out.println("l: Longest Author name");
+        */
+        System.out.println("r: Articles with titles smaller than 15 characters");
         System.out.println("q: Quit program");
         System.out.println();
     }

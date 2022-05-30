@@ -1,13 +1,9 @@
 package at.ac.fhcampuswien;
 
-import at.ac.fhcampuswien.enums.Category;
-import at.ac.fhcampuswien.enums.Country;
-import at.ac.fhcampuswien.enums.Language;
-import at.ac.fhcampuswien.enums.SortBy;
+import at.ac.fhcampuswien.enums.*;
+import jdk.dynalink.Operation;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
 
 
 /**
@@ -101,6 +97,47 @@ public class AppController {
             return null;
         } else {
             return outputBuffer;
+        }
+    }
+
+/*   Nico [nicht niggo] working on it
+    /**
+     * Searches the Articles for the Author with the longest name.
+     **/
+    /*
+    public String getLongestName(){
+        List<String> authors = new ArrayList<>();
+        if (articles == null) {
+            return "There are no authors yet!";
+        }else {
+            for (Article article : articles) {
+                authors.add(article.getAuthor());
+            }
+            System.out.println(authors);
+            String result = authors.stream().
+                    max(author -> author.length());
+            System.out.println(result);
+            return null;
+        }
+    }
+    */
+
+    /**
+     * Searches for a list of Articles with a title that consists of less than 15 characters.
+     */
+    public List<Article> getTitlesLessThan15(){
+        List<Article> filteredArticles = new ArrayList<>();
+        if (articles == null) {
+            return null;
+        }else {
+             articles.stream()
+                    .filter(article -> article.getTitle().length() < 15)
+                    .forEach(filteredArticles::add);
+                    if(filteredArticles.isEmpty()) {
+                        return null;
+                    }else {
+                        return filteredArticles;
+                    }
         }
     }
 
