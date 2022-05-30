@@ -1,5 +1,6 @@
 package at.ac.fhcampuswien;
 
+import java.io.IOException;
 import java.util.Scanner;
 
 public class Menu {
@@ -55,16 +56,17 @@ public class Menu {
     private void getTopHeadlinesAustria(AppController ctrl){
         try {
             System.out.println(ctrl.getTopHeadLinesAustria());
-        } catch (NullPointerException e){
-            System.out.println("There are no top headlines in Austria!");
+        } catch (NullPointerException | NewsAPIException e){
+            System.out.println("Sorry! There are no top headlines in Austria!");
+            System.out.println(e.getMessage());
         }
     }
 
-    private void getAllNewsBitcoin(AppController ctrl){
+    private void getAllNewsBitcoin(AppController ctrl) {
         try {
             System.out.println(ctrl.getAllNewsBitcoin());
-        } catch (NullPointerException e){
-            System.out.println("There are no news about bitcoin!");
+        } catch (NullPointerException | NewsAPIException e){
+            System.out.println("Sadly, there are no news about bitcoin!");
         }
     }
 

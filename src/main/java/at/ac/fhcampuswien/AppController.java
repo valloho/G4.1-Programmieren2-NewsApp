@@ -1,8 +1,6 @@
 package at.ac.fhcampuswien;
 
 import at.ac.fhcampuswien.enums.*;
-import jdk.dynalink.Operation;
-
 import java.util.*;
 
 
@@ -53,7 +51,7 @@ public class AppController {
      *
      * @return Empty array list of articles
      */
-    public List<Article> getTopHeadLinesAustria() {
+    public List<Article> getTopHeadLinesAustria() throws NewsAPIException {
 
         articles = NewsApi.getTopHeadlines("ukraine", Language.GERMAN, Country.AUSTRIA, Category.GENERAL).getArticles();
 
@@ -68,7 +66,7 @@ public class AppController {
      *
      * @return A list of articles about bitcoins
      */
-    public List<Article> getAllNewsBitcoin() {
+    public List<Article> getAllNewsBitcoin() throws NewsAPIException {
 
         articles = NewsApi.getEverything("bitcoin", Language.ENGLISH, SortBy.RELEVANCY).getArticles();
 
@@ -133,11 +131,11 @@ public class AppController {
              articles.stream()
                     .filter(article -> article.getTitle().length() < 15)
                     .forEach(filteredArticles::add);
-                    if(filteredArticles.isEmpty()) {
-                        return null;
-                    }else {
-                        return filteredArticles;
-                    }
+             if(filteredArticles.isEmpty()) {
+                 return null;
+             } else {
+                 return filteredArticles;
+             }
         }
     }
 

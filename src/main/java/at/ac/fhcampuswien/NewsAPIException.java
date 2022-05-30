@@ -6,6 +6,10 @@ public class NewsAPIException extends Exception{
 
     public NewsAPIException(String message){
         super(message);
-    };
+    }
 
+    @Override
+    public String getMessage() {
+        return "Oops. Something went wrong!";
+    }
 }
