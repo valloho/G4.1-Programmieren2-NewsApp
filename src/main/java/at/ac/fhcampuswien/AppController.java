@@ -54,7 +54,7 @@ public class AppController {
      *
      * @return a list of articles from Austria about Ukraine
      */
-    public List<Article> getTopHeadLinesAustria() {
+    public List<Article> getTopHeadLinesAustria() throws NewsAPIException {
 
         articles = NewsApi.getTopHeadlines("ukraine", Language.GERMAN, Country.AUSTRIA, Category.GENERAL).getArticles();
 
@@ -69,7 +69,7 @@ public class AppController {
      *
      * @return A list of articles about bitcoins
      */
-    public List<Article> getAllNewsBitcoin() {
+    public List<Article> getAllNewsBitcoin() throws NewsAPIException {
 
         articles = NewsApi.getEverything("bitcoin", Language.ENGLISH, SortBy.RELEVANCY).getArticles();
 

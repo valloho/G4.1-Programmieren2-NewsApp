@@ -68,7 +68,6 @@ public class Menu {
             System.out.println(ctrl.getTopHeadLinesAustria());
         } catch (NullPointerException | NewsAPIException e){
             System.out.println("Sorry! There are no top headlines in Austria!");
-            System.out.println(e.getMessage());
         }
     }
 
