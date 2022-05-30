@@ -1,6 +1,5 @@
 package at.ac.fhcampuswien;
 
-import java.util.List;
 import java.util.Map;
 
 public class Article {
@@ -31,6 +30,14 @@ public class Article {
         return this.author;
     }
 
+    public int getAuthorLength(){
+        if (this.author == null){
+            return 0;
+        }else {
+            return this.author.length();
+        }
+    }
+
     //Title Getter
     public String getTitle(){
         return this.title;
@@ -38,6 +45,14 @@ public class Article {
 
     public String getDescription(){
         return this.description;
+    }
+
+    public int getDescriptionLength(){
+        if (this.description == null){
+            return 0;
+        }else {
+            return this.description.length();
+        }
     }
 
     public String getUrl() {
