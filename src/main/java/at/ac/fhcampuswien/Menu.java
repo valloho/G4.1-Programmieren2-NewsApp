@@ -5,8 +5,6 @@ import java.util.Scanner;
 
 public class Menu {
 
-
-    private AppController controller = new AppController();
     private static final String INVALID_USER_INPUT_MESSAGE = "Your input was invalid. Try again!";
     private static final String EXIT_MESSAGE = "Thank you for using our app! Goodbye :)";
 
@@ -19,48 +17,48 @@ public class Menu {
     private void handleInput(String input){
         switch (input) {
             case "a" -> {
-                getTopHeadlinesAustria(controller);
+                getTopHeadlinesAustria(AppController.getInstance());
                 System.out.println();
                 start();
             }
             case "b" -> {
-                getAllNewsBitcoin(controller);
+                getAllNewsBitcoin(AppController.getInstance());
                 System.out.println();
                 start();
             }
             case "y" -> {
-                getArticleCount(controller);
+                getArticleCount(AppController.getInstance());
                 System.out.println();
                 start();
             }
 
             case "l" -> {
-                getLongestAuthor(controller);
+                getLongestAuthor(AppController.getInstance());
                 System.out.println();
                 start();
             }
             case "r" -> {
-                getTitlesLessThan15(controller);
+                getTitlesLessThan15(AppController.getInstance());
                 System.out.println();
                 start();
             }
             case "m" -> {
-                mostArticleSource(controller);
+                mostArticleSource(AppController.getInstance());
                 System.out.println();
                 start();
             }
             case "n" -> {
-                newYorkTimes(controller);
+                newYorkTimes(AppController.getInstance());
                 System.out.println();
                 start();
             }
             case "d" -> {
-                getOrderedBasedOnDescription(controller);
+                getOrderedBasedOnDescription(AppController.getInstance());
                 System.out.println();
                 start();
             }
             case "s" -> {
-                getOrderedBasedOnDescriptionShort(controller);
+                getOrderedBasedOnDescriptionShort(AppController.getInstance());
                 System.out.println();
                 start();
             }
