@@ -1,13 +1,11 @@
 package at.ac.fhcampuswien;
 
-import at.ac.fhcampuswien.enums.Category;
-import at.ac.fhcampuswien.enums.Country;
-import at.ac.fhcampuswien.enums.Language;
-import at.ac.fhcampuswien.enums.SortBy;
+import at.ac.fhcampuswien.enums.*;
+import jdk.dynalink.Operation;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 
 
 /**
@@ -69,7 +67,7 @@ public class AppController {
      *
      * @return a list of articles from Austria about Ukraine
      */
-    public List<Article> getTopHeadLinesAustria() {
+    public List<Article> getTopHeadLinesAustria() throws NewsAPIException {
 
         articles = NewsApi.getTopHeadlines("ukraine", Language.GERMAN, Country.AUSTRIA, Category.GENERAL).getArticles();
 
@@ -84,7 +82,7 @@ public class AppController {
      *
      * @return A list of articles about bitcoins
      */
-    public List<Article> getAllNewsBitcoin() {
+    public List<Article> getAllNewsBitcoin() throws NewsAPIException {
 
         articles = NewsApi.getEverything("bitcoin", Language.ENGLISH, SortBy.RELEVANCY).getArticles();
 
@@ -117,6 +115,83 @@ public class AppController {
     }
 
     /**
+     * Searches the Articles for the Author with the longest name.
+     **/
+
+    public String getLongestName(){
+        if (articles == null) {
+            return "There are no authors yet!";
+        }else {
+            return articles.stream().max(Comparator.comparingInt(Article::getAuthorLength)).orElse(null).getAuthor();
+        }
+    }
+
+    /**
+     * Searches for a list of Articles with a title that consists of less than 15 characters.
+     */
+    public List<Article> getTitlesLessThan15(){
+        List<Article> filteredArticles = new ArrayList<>();
+        if (articles == null) {
+            return null;
+        }else {
+             articles.stream()
+                    .filter(article -> article.getTitle().length() < 15)
+                    .forEach(filteredArticles::add);
+                    if(filteredArticles.isEmpty()) {
+                        return null;
+                    }else {
+                        return filteredArticles;
+                    }
+        }
+    }
+    /**
+     * Orders the Articles based on the length of the description.
+     */
+    public List<Article> getOrderedBasedOnDescription(){
+        if (articles == null) {
+            return null;
+        }else {
+
+            return articles.stream()
+                    .sorted(Comparator.comparingInt(Article::getDescriptionLength).thenComparing(Article::getDescription))
+                    .collect(Collectors.toList());
+        }
+    }
+
+    /**
+     * Orders the Articles and outputs a short version with the title, description length and the description.
+     */
+    public List<String> getOrderedBasedOnDescriptionShort(){
+        List<String> orderedArticles = new ArrayList<>();
+        if (articles == null) {
+            return null;
+        }else {
+            articles.stream()
+                    .sorted(Comparator.comparingInt(Article::getDescriptionLength).thenComparing(Article::getDescription))
+                    .forEach(article -> orderedArticles.add("Title: " + article.getTitle() + "\n" + "Desc (length): " + article.getDescription().length() + "\n" + "Desc: " + article.getDescription() + "\n"));
+            return orderedArticles;
+        }
+    }
+
+    public String outputMostArticleSource() {
+        String test = articles.stream().parallel().map(Article::getSource)
+            .collect(Collectors.groupingBy(Function.identity(), Collectors.counting()))
+            .entrySet().stream().parallel()
+            .max(Map.Entry.comparingByValue()).map(Map.Entry::getKey)
+            .orElse(null);
+        return test;
+    }  
+    
+    public long checkForSpecificSource(String sourceName) {
+        if (sourceName != null && sourceName != "") {
+            long count = articles.stream().filter(article -> sourceName.equals(article.getSource())).count();
+            return count;
+        }
+        else {
+            return 0;
+        }
+    }
+    /**
      * Generates a list with dummy articles.
      *
      * @return List of dummy articles
@@ -131,19 +206,19 @@ public class AppController {
             Article newArticle = null;
             switch (articleNumber) {
                 case 0:
-                    newArticle = new Article("Derek Landy", "Skulduggery Pleasant: And he's the good guy", "description", "www.newsapi.com", "urlToImage", "1-1-2000", "content");
+                    /**newArticle = new Article("Derek Landy", "Skulduggery Pleasant: And he's the good guy", "description", "www.newsapi.com", "urlToImage", "1-1-2000", "content", new List<String>("test"));
                     break;
                 case 1:
-                    newArticle = new Article("Agatha Christi", "Alibi", "description", "www.newsapi.com", "urlToImage", "1-1-2000", "content");
+                    newArticle = new Article("Agatha Christi", "Alibi", "description", "www.newsapi.com", "urlToImage", "1-1-2000", "content", new String[]{"test"});
                     break;
                 case 2:
-                    newArticle = new Article("Rick Riordan", "Percy Jackson", "description", "www.newsapi.com", "urlToImage", "1-1-2000", "content");
+                    newArticle = new Article("Rick Riordan", "Percy Jackson", "description", "www.newsapi.com", "urlToImage", "1-1-2000", "content", new String[]{"test"});
                     break;
                 case 3:
-                    newArticle = new Article("Michael Ende", "Momo", "description", "www.newsapi.com", "urlToImage", "1-1-2000", "content");
+                    newArticle = new Article("Michael Ende", "Momo", "description", "www.newsapi.com", "urlToImage", "1-1-2000", "content", new String[]{"test"});
                     break;
-                case 4:
-                    newArticle = new Article("Markus Heitz", "Zwerge", "description", "www.newsapi.com", "urlToImage", "1-1-2000", "content");
+                case 4:*/
+                    /* newArticle = new Article("Markus Heitz", "Zwerge", "description", "www.newsapi.com", "urlToImage", "1-1-2000", "content", new String[]{"test"}); */
             }
             newArticles.add(newArticle);
         }

@@ -1,5 +1,7 @@
 package at.ac.fhcampuswien;
 
+import java.util.Map;
+
 public class Article {
 
     private String author;
@@ -9,9 +11,10 @@ public class Article {
     private String urlToImage;
     private String publishedAt;
     private String content;
+    private Map<String, String> source;
 
     //Article constructor: will be used with APIs in future exercises
-    public Article(String author, String title, String description, String url, String urlToImage, String publishedAt, String content){
+    public Article(String author, String title, String description, String url, String urlToImage, String publishedAt, String content, Map<String, String> source){
         this.author = author;
         this.title = title;
         this.description = description;
@@ -19,11 +22,20 @@ public class Article {
         this.urlToImage = urlToImage;
         this.publishedAt = publishedAt;
         this.content = content;
+        this.source = source;
     }
 
     //Author Getter
     public String getAuthor(){
         return this.author;
+    }
+
+    public int getAuthorLength(){
+        if (this.author == null){
+            return 0;
+        }else {
+            return this.author.length();
+        }
     }
 
     //Title Getter
@@ -33,6 +45,14 @@ public class Article {
 
     public String getDescription(){
         return this.description;
+    }
+
+    public int getDescriptionLength(){
+        if (this.description == null){
+            return 0;
+        }else {
+            return this.description.length();
+        }
     }
 
     public String getUrl() {
@@ -49,6 +69,10 @@ public class Article {
 
     public String getContent() {
         return this.content;
+    }
+
+    public String getSource() {
+        return this.source.get("name");
     }
 
     //toString function for Author and Title
@@ -79,7 +103,7 @@ public class Article {
         if (this.content != null) {
             stringBuilder.append("Content: ").append(this.content).append(System.lineSeparator());
         }
-
+        
         return stringBuilder.toString();
     }
 }

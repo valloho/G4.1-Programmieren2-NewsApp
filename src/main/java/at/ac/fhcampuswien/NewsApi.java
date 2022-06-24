@@ -6,7 +6,6 @@ import com.google.gson.JsonSyntaxException;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
-
 import java.io.IOException;
 import java.net.UnknownHostException;
 import java.util.Objects;
@@ -35,7 +34,7 @@ public class NewsApi {
         return url;
     }
 
-    private static NewsResponse request(String url) {
+    private static NewsResponse request(String url) throws NewsAPIException{
         try {
             Request request = new Request.Builder().url(url).build();
             Response response = client.newCall(request).execute();
@@ -43,32 +42,31 @@ public class NewsApi {
             return gson.fromJson(json, NewsResponse.class);
         } catch (UnknownHostException e) {
             client.dispatcher().executorService().shutdown();
-            System.out.println("Überprüfe deine Internetverbindung");
+            System.out.println("Please check your internet connectivity.");
             return null;
         } catch (IllegalArgumentException e) {
-            System.out.println("Falsche URL");
+            System.out.println("Sorry! Invalid URL.");
             return null;
         } catch (JsonSyntaxException e){
-            System.out.println("False Json Syntax");
+            System.out.println("Sorry! Invalid Json Syntax.");
             return null;
         } catch (IllegalStateException e){
-            System.out.println("Illegales Json Statement");
+            System.out.println("Sorry! Illegal Json Statement.");
             return null;
         } catch (IOException e) {
-            System.out.println("Der Irgendwas Fehler");
-            return null;
+            throw new NewsAPIException(e.getMessage());
         }
     }
 
-    public static NewsResponse getEverything(String q, Language language, SortBy sortBy) {
+    public static NewsResponse getEverything(String q, Language language, SortBy sortBy) throws NewsAPIException {
         return request(getURL(Endpoint.EVERYTHING, q, language, sortBy, null, null));
     }
 
-    public static NewsResponse getTopHeadlines(String q, Language language, Country country, Category category) {
+    public static NewsResponse getTopHeadlines(String q, Language language, Country country, Category category) throws NewsAPIException {
         return request(getURL(Endpoint.TOP_HEADLINES, q, language, null, country, category));
     }
 
-    public static NewsResponse getSources(Language language, Country country, Category category) {
+    public static NewsResponse getSources(Language language, Country country, Category category) throws NewsAPIException {
         return request(getURL(Endpoint.SOURCES, null, null, null, country, category));
     }
 }
