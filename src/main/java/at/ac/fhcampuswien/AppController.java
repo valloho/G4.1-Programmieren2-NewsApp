@@ -14,10 +14,23 @@ import java.util.Random;
  * Manages a list of articles
  */
 public class AppController {
-    private List<Article> articles;
 
-    public AppController() {
+    // Singleton
+    private static AppController instance = null;
+    private AppController() {
     }
+    public static AppController getInstance() {
+
+        if (instance == null) {
+
+            instance = new AppController();
+        }
+
+        return instance;
+    }
+
+    // Articles
+    private List<Article> articles;
 
     //region SETTER ----------------------------------------------------------------------------------------------------
 
