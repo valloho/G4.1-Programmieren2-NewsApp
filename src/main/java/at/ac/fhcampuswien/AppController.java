@@ -206,10 +206,10 @@ public class AppController {
             articleURLs.put(i, new ArrayList<String>());
         }*/
         //list all elements of articles
-        if (articles == null) {
+        if (AppController.getInstance().getArticles() == null) {
             return 0;
         }
-        List<String> articleList = articles.stream().map(Article::getUrl).filter(Objects::nonNull).collect(Collectors.toList());
+        List<String> articleList = AppController.getInstance().getArticles().stream().map(Article::getUrl).filter(Objects::nonNull).collect(Collectors.toList());
         return downloadObject.process(articleList);
     }
     /**
