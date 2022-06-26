@@ -194,7 +194,7 @@ public class AppController {
     }
 
     public int downloadURLs(Downloader downloadObject) throws NewsAPIException {
-        //return information in a list
+        //return information in a list_
         /**
          * manual iterating
          * Map<Integer, List<String>> articleURLs = new HashMap<>();
