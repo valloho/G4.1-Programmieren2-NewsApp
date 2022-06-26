@@ -1,8 +1,6 @@
 package at.ac.fhcampuswien;
 
 import at.ac.fhcampuswien.enums.*;
-import jdk.dynalink.Operation;
-
 import java.util.*;
 import java.util.function.Function;
 import java.util.stream.Collectors;

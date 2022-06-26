@@ -1,5 +1,8 @@
 package at.ac.fhcampuswien;
 
+import at.ac.fhcampuswien.downloader.ParallelDownloader;
+import at.ac.fhcampuswien.downloader.SequentialDownloader;
+
 import java.io.IOException;
 import java.util.Scanner;
 
@@ -7,6 +10,8 @@ public class Menu {
 
     private static final String INVALID_USER_INPUT_MESSAGE = "Your input was invalid. Try again!";
     private static final String EXIT_MESSAGE = "Thank you for using our app! Goodbye :)";
+
+    private AppController controller;
 
     public void start(){
         Scanner scanner = new Scanner(System.in);
@@ -63,11 +68,27 @@ public class Menu {
                 start();
             }
             case "q" -> printExitMessage();
+            case "h" -> downloadURLs();
             default -> {
                 printInvalidInputMessage();
                 System.out.println();
                 start();
             }
+        }
+    }
+
+    private void downloadURLs(){
+        try {
+            int resultSequential = controller.downloadURLs(new SequentialDownloader());
+            // TODO print time in ms it took to download URLs sequentially
+
+            // TODO implement the process() function in ParallelDownloader class
+            int resultParallel = controller.downloadURLs(new ParallelDownloader());
+
+            // TODO print time in ms it took to download URLs parallel
+
+        } catch (NewsAPIException e){
+            System.out.println(e.getMessage());
         }
     }
 
