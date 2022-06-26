@@ -14,6 +14,7 @@ public class Article {
     private Map<String, String> source;
 
     //Article constructor: will be used with APIs in future exercises
+    /*
     public Article(String author, String title, String description, String url, String urlToImage, String publishedAt, String content, Map<String, String> source){
         this.author = author;
         this.title = title;
@@ -24,6 +25,7 @@ public class Article {
         this.content = content;
         this.source = source;
     }
+     */
 
     //Author Getter
     public String getAuthor(){

@@ -21,6 +21,7 @@ public class NewsApi {
     private static final Gson gson = new Gson();
 
 
+    /*
     private static String getURL(Endpoint endPoint, String q, Language language, SortBy sortBy, Country country, Category category) {
         String url = "";
 
@@ -33,6 +34,7 @@ public class NewsApi {
         }
         return url;
     }
+     */
 
     private static NewsResponse request(String url) throws NewsAPIException{
         try {
@@ -58,15 +60,105 @@ public class NewsApi {
         }
     }
 
+    public static class URLBuilder {
+
+        private final String initialURL;
+        private Category category;
+        private String q;
+        private Language language;
+        private Country country;
+        private SortBy sortBy;
+        private String apiKey;
+
+        private String finalURL;
+
+        public URLBuilder (String initialURL) {
+
+            this.initialURL = initialURL;
+            this.finalURL = initialURL;
+        }
+
+        public URLBuilder category(Category category) {
+
+            this.category = category;
+            finalURL += finalURL == initialURL ? "" : "&";
+            finalURL += "category=" + category.category;
+            return this;
+        }
+        public URLBuilder querry(String q) {
+
+            this.q = q;
+            finalURL += finalURL == initialURL ? "" : "&";
+            finalURL += "q=" + q;
+            return this;
+        }
+        public URLBuilder language(Language language) {
+
+            this.language = language;
+            finalURL += finalURL == initialURL ? "" : "&";
+            finalURL += "language=" + language.label;
+            return this;
+        }
+        public URLBuilder country(Country country) {
+
+            this.country = country;
+            finalURL += finalURL == initialURL ? "" : "&";
+            finalURL += "country=" + country.countrycode;
+            return this;
+        }
+        public URLBuilder sortBy(SortBy sortBy) {
+
+            this.sortBy = sortBy;
+            finalURL += finalURL == initialURL ? "" : "&";
+            finalURL += "sortBy=" + sortBy.sortby;
+            return this;
+        }
+        public URLBuilder apiKey(String apiKey) {
+
+            this.apiKey = apiKey;
+            finalURL += finalURL == initialURL ? "" : "&";
+            finalURL += "apiKey=" + apiKey;
+            return this;
+        }
+
+        public String build() {
+
+            return finalURL;
+        }
+    }
+
     public static NewsResponse getEverything(String q, Language language, SortBy sortBy) throws NewsAPIException {
-        return request(getURL(Endpoint.EVERYTHING, q, language, sortBy, null, null));
+
+        String url = new URLBuilder(everything)
+                .querry(q)
+                .language(language)
+                .sortBy(sortBy)
+                .apiKey(apiKey)
+                .build();
+
+        return request(url);
     }
 
     public static NewsResponse getTopHeadlines(String q, Language language, Country country, Category category) throws NewsAPIException {
-        return request(getURL(Endpoint.TOP_HEADLINES, q, language, null, country, category));
+
+        String url = new URLBuilder(topHeadlines)
+                .querry(q)
+                .language(language)
+                .country(country)
+                .category(category)
+                .apiKey(apiKey)
+                .build();
+
+        return request(url);
     }
 
-    public static NewsResponse getSources(Language language, Country country, Category category) throws NewsAPIException {
-        return request(getURL(Endpoint.SOURCES, null, null, null, country, category));
+    public static NewsResponse getSources(Country country, Category category) throws NewsAPIException {
+
+        String url = new URLBuilder(sources)
+                .country(country)
+                .category(category)
+                .build();
+
+        return request(url);
     }
 }
