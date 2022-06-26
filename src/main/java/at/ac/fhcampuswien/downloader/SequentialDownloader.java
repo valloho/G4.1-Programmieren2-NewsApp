@@ -6,6 +6,16 @@ import java.util.List;
 
 public class SequentialDownloader extends Downloader{
 
+    private static SequentialDownloader downloader = null;
+    private SequentialDownloader(){};
+
+    public static SequentialDownloader getInstance() {
+        if(downloader == null) {
+            downloader = new SequentialDownloader();
+        }
+        return downloader;
+    }
+
     // returns number of downloaded article urls
     @Override
     public int process(List<String> urls) throws NewsAPIException {
