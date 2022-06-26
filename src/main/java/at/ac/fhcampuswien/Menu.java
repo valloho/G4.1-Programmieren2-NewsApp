@@ -11,7 +11,7 @@ public class Menu {
     private static final String INVALID_USER_INPUT_MESSAGE = "Your input was invalid. Try again!";
     private static final String EXIT_MESSAGE = "Thank you for using our app! Goodbye :)";
 
-    private AppController controller;
+    AppController controller = new AppController();
 
     public void start(){
         Scanner scanner = new Scanner(System.in);
@@ -67,8 +67,12 @@ public class Menu {
                 System.out.println();
                 start();
             }
+            case "h" -> {
+                downloadURLs();
+                System.out.println();
+                start();
+            }
             case "q" -> printExitMessage();
-            case "h" -> downloadURLs();
             default -> {
                 printInvalidInputMessage();
                 System.out.println();
@@ -79,13 +83,22 @@ public class Menu {
 
     private void downloadURLs(){
         try {
-            int resultSequential = controller.downloadURLs(new SequentialDownloader());
+            SequentialDownloader sequentialDownloader = SequentialDownloader.getInstance();
+            ParallelDownloader parallelDownloader = ParallelDownloader.getInstance();
+
             // TODO print time in ms it took to download URLs sequentially
+            long start_sequent = System.currentTimeMillis();
+            int resultSequential = controller.downloadURLs(sequentialDownloader);
+            long end_sequent = System.currentTimeMillis();
 
             // TODO implement the process() function in ParallelDownloader class
-            int resultParallel = controller.downloadURLs(new ParallelDownloader());
+            long start_parallel = System.currentTimeMillis();
+            int resultParallel = controller.downloadURLs(parallelDownloader);
+            long end_parallel = System.currentTimeMillis();
 
             // TODO print time in ms it took to download URLs parallel
+            System.out.println("It takes " + (end_sequent - start_sequent) + " milliseconds for " + resultSequential + " Articles in Sequential!");
+            System.out.println("It takes " + (end_parallel - start_parallel) + " milliseconds for " + resultParallel + " Articles in Parallel!");
 
         } catch (NewsAPIException e){
             System.out.println(e.getMessage());
@@ -181,6 +194,7 @@ public class Menu {
         System.out.println("r: Articles with titles smaller than 15 characters");
         System.out.println("d: Sort articles based on description length");
         System.out.println("s: Sort articles based on description length - shorter version");
+        System.out.println("h: Download URLs");
         System.out.println("q: Quit program");
         System.out.println();
     }

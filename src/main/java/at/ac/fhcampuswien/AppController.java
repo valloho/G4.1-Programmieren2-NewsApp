@@ -14,8 +14,10 @@ public class AppController {
 
     // Singleton
     private static AppController instance = null;
-    private AppController() {
+    public AppController() {
+
     }
+
     public static AppController getInstance() {
 
         if (instance == null) {
