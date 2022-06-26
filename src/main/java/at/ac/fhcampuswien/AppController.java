@@ -1,5 +1,6 @@
 package at.ac.fhcampuswien;
 
+import at.ac.fhcampuswien.downloader.Downloader;
 import at.ac.fhcampuswien.enums.*;
 import java.util.*;
 import java.util.function.Function;
@@ -190,7 +191,7 @@ public class AppController {
         }
     }
 
-    public List<String> downloadURLs() {
+    public int downloadURLs(Downloader downloadObject) throws NewsAPIException {
         //return information in a list
         /**
          * manual iterating
@@ -204,10 +205,10 @@ public class AppController {
         }*/
         //list all elements of articles
         if (articles == null) {
-            return null;
+            return 0;
         }
         List<String> articleList = articles.stream().map(Article::getUrl).filter(Objects::nonNull).collect(Collectors.toList());
-        return articleList;
+        return downloadObject.process(articleList);
     }
     /**
      * Generates a list with dummy articles.
