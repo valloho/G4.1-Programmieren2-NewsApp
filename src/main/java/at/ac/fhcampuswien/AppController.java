@@ -191,6 +191,26 @@ public class AppController {
             return 0;
         }
     }
+
+    public List<String> downloadURLs() {
+        //return information in a list
+        /**
+         * manual iterating
+         * Map<Integer, List<String>> articleURLs = new HashMap<>();
+        String bufferList[];
+        for (int i = 0; i < articles.size(); i++) {
+            //add element
+            bufferList = null;
+            bufferList = { articles.get(i).getUrl(), articles.get(i).getUrlToImage() };
+            articleURLs.put(i, new ArrayList<String>());
+        }*/
+        //list all elements of articles
+        if (articles == null) {
+            return null;
+        }
+        List<String> articleList = articles.stream().map(Article::getUrl).filter(Objects::nonNull).collect(Collectors.toList());
+        return articleList;
+    }
     /**
      * Generates a list with dummy articles.
      *
