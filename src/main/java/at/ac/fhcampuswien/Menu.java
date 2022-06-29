@@ -11,7 +11,7 @@ public class Menu {
     private static final String INVALID_USER_INPUT_MESSAGE = "Your input was invalid. Try again!";
     private static final String EXIT_MESSAGE = "Thank you for using our app! Goodbye :)";
 
-    AppController controller = new AppController();
+    //AppController controller = new AppController();
 
     public void start(){
         Scanner scanner = new Scanner(System.in);
@@ -88,12 +88,12 @@ public class Menu {
 
             // TODO print time in ms it took to download URLs sequentially
             long start_sequent = System.currentTimeMillis();
-            int resultSequential = controller.downloadURLs(sequentialDownloader);
+            int resultSequential = AppController.getInstance().downloadURLs(sequentialDownloader);
             long end_sequent = System.currentTimeMillis();
 
             // TODO implement the process() function in ParallelDownloader class
             long start_parallel = System.currentTimeMillis();
-            int resultParallel = controller.downloadURLs(parallelDownloader);
+            int resultParallel = AppController.getInstance().downloadURLs(parallelDownloader);
             long end_parallel = System.currentTimeMillis();
 
             // TODO print time in ms it took to download URLs parallel

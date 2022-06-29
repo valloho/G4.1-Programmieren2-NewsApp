@@ -14,7 +14,7 @@ public class AppController {
 
     // Singleton
     private static AppController instance = null;
-    public AppController() {
+    private AppController() {
 
     }
 
@@ -130,19 +130,28 @@ public class AppController {
     /**
      * Searches for a list of Articles with a title that consists of less than 15 characters.
      */
-    public List<Article> getTitlesLessThan15(){
+    public List<Article> getTitlesLessThan15() {
+
         List<Article> filteredArticles = new ArrayList<>();
+
         if (articles == null) {
+
             return null;
-        }else {
+        }
+        else {
+
              articles.stream()
                     .filter(article -> article.getTitle().length() < 15)
                     .forEach(filteredArticles::add);
-                    if(filteredArticles.isEmpty()) {
-                        return null;
-                    }else {
-                        return filteredArticles;
-                    }
+
+            if(filteredArticles.isEmpty()) {
+
+                return null;
+            }
+            else {
+
+                return filteredArticles;
+            }
         }
     }
     /**

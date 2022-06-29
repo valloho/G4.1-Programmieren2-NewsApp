@@ -36,26 +36,38 @@ public class NewsApi {
     }
      */
 
-    private static NewsResponse request(String url) throws NewsAPIException{
+    private static NewsResponse request(String url) throws NewsAPIException {
+
         try {
+
             Request request = new Request.Builder().url(url).build();
             Response response = client.newCall(request).execute();
             String json = Objects.requireNonNull(response.body()).string();
             return gson.fromJson(json, NewsResponse.class);
-        } catch (UnknownHostException e) {
+        }
+        catch (UnknownHostException e) {
+
             client.dispatcher().executorService().shutdown();
             System.out.println("Please check your internet connectivity.");
             return null;
-        } catch (IllegalArgumentException e) {
+        }
+        catch (IllegalArgumentException e) {
+
             System.out.println("Sorry! Invalid URL.");
             return null;
-        } catch (JsonSyntaxException e){
+        }
+        catch (JsonSyntaxException e) {
+
             System.out.println("Sorry! Invalid Json Syntax.");
             return null;
-        } catch (IllegalStateException e){
+        }
+        catch (IllegalStateException e) {
+
             System.out.println("Sorry! Illegal Json Statement.");
             return null;
-        } catch (IOException e) {
+        }
+        catch (IOException e) {
+
             throw new NewsAPIException(e.getMessage());
         }
     }
@@ -85,7 +97,7 @@ public class NewsApi {
             finalURL += "category=" + category.category;
             return this;
         }
-        public URLBuilder querry(String q) {
+        public URLBuilder query(String q) {
 
             this.q = q;
             finalURL += finalURL == initialURL ? "" : "&";
@@ -130,7 +142,7 @@ public class NewsApi {
     public static NewsResponse getEverything(String q, Language language, SortBy sortBy) throws NewsAPIException {
 
         String url = new URLBuilder(everything)
-                .querry(q)
+                .query(q)
                 .language(language)
                 .sortBy(sortBy)
                 .apiKey(apiKey)
@@ -142,7 +154,7 @@ public class NewsApi {
     public static NewsResponse getTopHeadlines(String q, Language language, Country country, Category category) throws NewsAPIException {
 
         String url = new URLBuilder(topHeadlines)
-                .querry(q)
+                .query(q)
                 .language(language)
                 .country(country)
                 .category(category)

@@ -1,6 +1,6 @@
 package at.ac.fhcampuswien;
 
-public class NewsAPIException extends Exception{
+public class NewsAPIException extends Exception {
 
     public NewsAPIException(){};
 
