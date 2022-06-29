@@ -15,7 +15,7 @@ public class AppController {
     // Singleton
     private static AppController instance = null;
     private AppController() {
-
+        // No one can make an instance
     }
 
     public static AppController getInstance() {
